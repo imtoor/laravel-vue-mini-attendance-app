@@ -3,6 +3,9 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use Illuminate\Support\Facades\Hash;
+use Ramsey\Uuid\Uuid;
+use App\Models\User;
 
 return new class extends Migration
 {
@@ -12,12 +15,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id')->primary();
             $table->string('name');
             $table->string('email')->unique();
             $table->string('phone', 13)->unique()->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->enum('level', ['superadmin','admin','karyawan']);
             $table->rememberToken();
             $table->timestamps();
         });
@@ -36,6 +40,33 @@ return new class extends Migration
             $table->longText('payload');
             $table->integer('last_activity')->index();
         });
+
+        User::create([
+            'id' => 1,
+            'name' => 'super admin',
+            'email' => 'superadmin@gmail.com',
+            'phone' => '081355538585',
+            'password' => Hash::make('123456'),
+            'level' => 'superadmin'
+        ]);
+
+        User::create([
+            'id' => 2,
+            'name' => 'admin',
+            'email' => 'admin@gmail.com',
+            'phone' => '088246125730',
+            'password' => Hash::make('123456'),
+            'level' => 'admin'
+        ]);
+
+        User::create([
+            'id' => 3,
+            'name' => 'karyawan',
+            'email' => 'karyawan@gmail.com',
+            'phone' => '081933941138',
+            'password' => Hash::make('123456'),
+            'level' => 'karyawan'
+        ]);
     }
 
     /**
