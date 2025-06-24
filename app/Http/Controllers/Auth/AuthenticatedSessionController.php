@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 use Inertia\Response;
+use App\Models\User;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -30,6 +31,8 @@ class AuthenticatedSessionController extends Controller
     public function store(LoginRequest $request): RedirectResponse
     {
         $request->authenticate();
+        $user = User::where('id', $request->user()->id)->first();
+        $user->createToken($user->name);
 
         $request->session()->regenerate();
 
@@ -41,6 +44,8 @@ class AuthenticatedSessionController extends Controller
      */
     public function destroy(Request $request): RedirectResponse
     {
+        auth()->user()->tokens()->delete();
+
         Auth::guard('web')->logout();
 
         $request->session()->invalidate();

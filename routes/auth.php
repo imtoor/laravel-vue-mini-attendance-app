@@ -40,9 +40,13 @@ Route::middleware('guest')->group(function () {
 
 Route::middleware('auth')->group(function () {
 
-    Route::get('data-karyawan', [DataKaryawanController::class, 'index']);
-    Route::get('data-absensi', [DataAbsensiController::class, 'index']);
-    Route::get('report', [ReportController::class, 'index']);
+    Route::get('data-karyawan', [DataKaryawanController::class, 'index'])->name('data-karyawan.index');
+    Route::get('data-karyawan/add', [DataKaryawanController::class, 'create'])->name('data-karyawan.add');
+    Route::get('data-karyawan/{id}/edit', [DataKaryawanController::class, 'edit'])->name('data-karyawan.edit');
+
+    Route::get('data-absensi', [DataAbsensiController::class, 'index'])->name('data-absensi.index');
+    
+    Route::get('report', [ReportController::class, 'index'])->name('report.index');
 
     Route::get('verify-email', EmailVerificationPromptController::class)
         ->name('verification.notice');
