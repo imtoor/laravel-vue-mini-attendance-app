@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('phone', 13)->unique()->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
-            $table->enum('level', ['superadmin','admin','karyawan']);
+            $table->enum('level', ['admin','karyawan']);
             $table->rememberToken();
             $table->timestamps();
         });
@@ -43,15 +43,6 @@ return new class extends Migration
 
         User::create([
             'id' => 1,
-            'name' => 'super admin',
-            'email' => 'superadmin@gmail.com',
-            'phone' => '081355538585',
-            'password' => Hash::make('123456'),
-            'level' => 'superadmin'
-        ]);
-
-        User::create([
-            'id' => 2,
             'name' => 'admin',
             'email' => 'admin@gmail.com',
             'phone' => '088246125730',
@@ -60,12 +51,30 @@ return new class extends Migration
         ]);
 
         User::create([
-            'id' => 3,
+            'id' => 2,
             'name' => 'karyawan',
             'email' => 'karyawan@gmail.com',
             'phone' => '081933941138',
             'password' => Hash::make('123456'),
-            'level' => 'karyawan'
+            'level' => 'karyawan',
+        ]);
+
+        User::create([
+            'id' => 3,
+            'name' => 'dimas',
+            'email' => 'dimas@gmail.com',
+            'phone' => '083478564321',
+            'password' => Hash::make('123456'),
+            'level' => 'karyawan',
+        ]);
+
+         User::create([
+            'id' => 4,
+            'name' => 'budi',
+            'email' => 'budi@gmail.com',
+            'phone' => '081123894561',
+            'password' => Hash::make('123456'),
+            'level' => 'karyawan',
         ]);
     }
 

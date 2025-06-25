@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\DataKaryawanController;
 use App\Http\Controllers\DataAbsensiController;
-use App\Http\Controllers\ReportController;
 
 Route::middleware('guest')->group(function () {
     Route::get('register', [RegisteredUserController::class, 'create'])
@@ -45,8 +44,6 @@ Route::middleware('auth')->group(function () {
     Route::get('data-karyawan/{id}/edit', [DataKaryawanController::class, 'edit'])->name('data-karyawan.edit');
 
     Route::get('data-absensi', [DataAbsensiController::class, 'index'])->name('data-absensi.index');
-    
-    Route::get('report', [ReportController::class, 'index'])->name('report.index');
 
     Route::get('verify-email', EmailVerificationPromptController::class)
         ->name('verification.notice');

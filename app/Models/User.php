@@ -23,7 +23,8 @@ class User extends Authenticatable
         'email',
         'phone',
         'password',
-        'level'
+        'level',
+        'admin'
     ];
 
     /**
@@ -35,7 +36,7 @@ class User extends Authenticatable
         'password',
         'remember_token',
         'email_verified_at',
-        'level',
+        'admin',
         'created_at',
         'updated_at'
     ];

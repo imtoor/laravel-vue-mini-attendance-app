@@ -2,7 +2,7 @@
 import AppLayout from '@/layouts/AppLayout.vue';
 import { Head, Link, usePage } from '@inertiajs/vue3';
 import PlaceholderPattern from '../../components/PlaceholderPattern.vue';
-import { ref, onMounted, computed, reactive } from 'vue';
+import { ref, onMounted, computed } from 'vue';
 import { type Absensi, type User, type SharedData } from '@/types';
 import { Plus, Fingerprint } from 'lucide-vue-next';
 import { Button } from '@/components/ui/button';
@@ -40,11 +40,14 @@ async function fetchAbsensi() {
         });
 
         const json          = await res.json();
+        msg.value           = json.msg;
         absensi.value       = json.data.item;
         totalAbsebsi.value  = json.data.total;
 
     } catch(errors) {
+
         console.log(errors);
+
     }
 
     loading.value = false;
@@ -69,17 +72,12 @@ async function absen() {
                 })
             });
 
-            const json = await res.json();
-            if (json.code != 200) {
-                throw json.msg;
-            }
-
-            alert(json.msg.toUpperCase());
+            const json = res.json();
         }
 
     } catch (errors) {
-        alert(errors.toUpperCase());
-        throw new Error(errors);
+
+        console.log(errors);
     }
 
     loading.value = false;
@@ -115,16 +113,14 @@ onMounted(() => {
                 <tr>
                   <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">No.</th>
                   <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Nama</th>
-                  <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Tanggal</th>
-                  <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Jam</th>
+                  <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Waktu</th>
                 </tr>
               </thead>
               <tbody class="bg-white dark:bg-gray-900 divide-y divide-gray-200 dark:divide-gray-700">
                 <tr v-for="abs in absensi" :key="abs.id">
-                                    <td class="px-6 py-4 whitespace-nowrap">{{ abs.no }}.</td>
-                                    <td class="px-6 py-4 whitespace-nowrap">{{ abs.name.toString().toUpperCase() }}</td>
-                                    <td class="px-6 py-4 whitespace-nowrap">{{ `${abs.created_at.split('T')[0].split('-')[2]}-${abs.created_at.split('T')[0].split('-')[1]}-${abs.created_at.split('T')[0].split('-')[0]}` }}</td>
-                                    <td class="px-6 py-4 whitespace-wrap">{{ `${abs.created_at.toString().split('T')[1].slice(0, 8)}` }}</td>
+                  <td class="px-6 py-4 whitespace-nowrap"></td>
+                  <td class="px-6 py-4 whitespace-nowrap"></td>
+                                    <td class="px-6 py-4 whitespace-nowrap">{{ `${moment(abs.created_at).format('LTS')} ${abs.created_at.split('T')[0].split('-')[2]}-${abs.created_at.split('T')[0].split('-')[1]}-${abs.created_at.split('T')[0].split('-')[0]}` }}</td>
                </tr>
               </tbody>
             </table>

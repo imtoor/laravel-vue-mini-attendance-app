@@ -13,22 +13,20 @@ const mainNavItems: NavItem[] = [
         title: 'Dashboard',
         href: '/dashboard',
         icon: LayoutGrid,
+        level: ['admin','karyawan'],
     },
     {
         title: 'Data Karyawan',
         href: '/data-karyawan',
         icon: Users,
+        level: ['admin'],
     },
     {
         title: 'Data Absensi',
         href: '/data-absensi',
         icon: SquareUserRound,
+        level: ['admin','karyawan'],
     },
-    {
-        title: 'Report',
-        href: '/report',
-        icon: ClipboardMinus
-    }
 ];
 
 const footerNavItems: NavItem[] = [
@@ -36,11 +34,6 @@ const footerNavItems: NavItem[] = [
         title: 'Github Repo',
         href: 'https://github.com/imtoor/laravel-vue-mini-attendance-app.git',
         icon: Github,
-    },
-    {
-        title: 'Documentation',
-        href: 'https://laravel.com/docs/starter-kits',
-        icon: BookOpen,
     },
 ];
 </script>

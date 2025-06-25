@@ -10,8 +10,6 @@ use Exception;
 
 class DataKaryawanApiController extends Controller
 {
-    private $code   = 200;
-    private $msg    = '';
 
     public function list(Request $request) {
 

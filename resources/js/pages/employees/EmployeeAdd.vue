@@ -101,6 +101,9 @@ async function onSubmit() {
           <Input id="phone" v-model="form.phone" placeholder="Masukkan no.handphone" />
           <div v-if="errors.phone" class="text-red-500 text-xs mt-1">{{ errors.phone }}</div>
         </div>
+        <div>
+            <h2 class="text-md font-medium">Password Default: <u>123456</u></h2>
+        </div>
         <Button type="submit" :disabled="loading" class="w-full">
           <span v-if="loading">Submitting...</span>
           <span v-else>Tambah Karyawan</span>

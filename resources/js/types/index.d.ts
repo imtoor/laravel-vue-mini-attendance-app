@@ -43,4 +43,10 @@ export interface Employee {
     phone: string;
 }
 
+export interface Absensi {
+    id: number;
+    users_id: number;
+    created_at: Date;
+}
+
 export type BreadcrumbItemType = BreadcrumbItem;
